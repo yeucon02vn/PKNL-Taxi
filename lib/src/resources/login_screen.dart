@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:taxi_app/src/app.dart';
+import 'package:taxi_app/src/resources/home_screen.dart';
+import 'package:taxi_app/src/resources/msg/ErrorMsg.dart';
+import 'package:taxi_app/src/resources/msg/delay_loading.dart';
 import 'package:taxi_app/src/resources/register_screen.dart';
 
 class LoginScreen extends StatefulWidget{
@@ -136,5 +140,18 @@ class _LoginScreenState extends State<LoginScreen> {
      ),
     );
   }
-  void _onClickLogin() {}
+  void _onClickLogin() {
+    String email = _emailController.text;
+    String pass = _passController.text;
+    var authBloc = BookingTaxi.of(context).authBloc;
+    Loading.showLoading(context, "Loading...");
+    authBloc.signIn(email, pass, () {
+      Loading.hideLoading(context);
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+    }, (msg) {
+      Loading.hideLoading(context);
+      ErrorMsg.showErrorMsg(context, "Sign-In", msg);
+    });
+  }
 }

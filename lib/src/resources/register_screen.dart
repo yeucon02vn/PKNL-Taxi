@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_app/src/blocs/auth_bloc.dart';
+import 'package:taxi_app/src/resources/msg/ErrorMsg.dart';
 
 import 'home_screen.dart';
+import 'msg/delay_loading.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -155,9 +157,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   _onClickSignUp() {
     var isVaild = authBloc.isValid(_nameController.text, _emailController.text, _passController.text, _phoneController.text);
     if(isVaild) {
+      // create user + loading 
+      Loading.showLoading(context, 'Loading...');
       authBloc.signUp(_nameController.text, _emailController.text, _passController.text, _phoneController.text, () {
         Navigator.push(
           context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      }, (msg) {
+        Loading.hideLoading(context);
+        ErrorMsg.showErrorMsg(context, "Sign-In", msg);
       });
     }
   }

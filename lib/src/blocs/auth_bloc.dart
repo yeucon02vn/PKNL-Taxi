@@ -42,19 +42,15 @@ class AuthBloc {
     return true;
   }
 
-  // void signUp(String email, String pass, String phone, String name,
-  //     Function onSuccess, Function(String) onError) {
-  //   _firAuth.signUp(email, pass, name, phone, onSuccess, onError);
-  // }
     void signUp(String name, String email, String pass, String phone, 
-      Function onSuccess) {
-    _firAuth.signUp( name, email, pass, phone, onSuccess);
+      Function onSuccess, Function(String) onRegisterError) {
+    _firAuth.signUp( name, email, pass, phone, onSuccess, onRegisterError);
   }
 
-  // void signIn(String email, String pass, Function onSuccess,
-  //     Function(String) onSignInError) {
-  //   _firAuth.signIn(email, pass, onSuccess, onSignInError);
-  // }
+  void signIn(String email, String pass, Function onSuccess,
+      Function(String) onSignInError) {
+    _firAuth.signIn(email, pass, onSuccess, onSignInError);
+  }
 
   void dispose() {
     _nameController.close();
