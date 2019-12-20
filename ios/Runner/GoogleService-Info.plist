@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:419686009194:ios:29cc281a8c6bb83afb3d13</string>
+	<string>1:419686009194:ios:b52bf7d31e814103fb3d13</string>
 	<key>DATABASE_URL</key>
 	<string>https://taxiapp-9eda6.firebaseio.com</string>
 </dict>
