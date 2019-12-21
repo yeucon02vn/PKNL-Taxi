@@ -115,7 +115,7 @@ packages:
       path: "..\\google_maps_flutter"
       relative: true
     source: path
-    version: "0.5.3"
+    version: "0.2.0+5"
   http:
     dependency: "direct main"
     description:

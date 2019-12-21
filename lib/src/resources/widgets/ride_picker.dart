@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:taxi_app/src/model/place_item_res.dart';
+import 'package:taxi_app/src/resources/ride_picker_page.dart';
 
 class RidePicker extends StatefulWidget {
   @override
+   final Function(PlaceItemRes, bool) onSelected;
+  RidePicker(this.onSelected);
   _RidePickerState createState() => _RidePickerState();
 }
 
 class _RidePickerState extends State<RidePicker> {
   @override
+  PlaceItemRes fromAddress;
+  PlaceItemRes toAddress;
+
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -25,7 +32,16 @@ class _RidePickerState extends State<RidePicker> {
             width: double.infinity,
             height: 30,
             child: FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => RidePickerPage(
+                            fromAddress == null ? "" : fromAddress.name,
+                            (place, isFrom) {
+                          widget.onSelected(place, isFrom);
+                          fromAddress = place;
+                          setState(() {});
+                        }, true)));
+              },
               child: SizedBox(
                 width: double.infinity,
                 height: double.infinity,
@@ -67,7 +83,16 @@ class _RidePickerState extends State<RidePicker> {
             width: double.infinity,
             height: 30,
             child: FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        RidePickerPage(toAddress == null ? "" : toAddress.name,
+                            (place, isFrom) {
+                          widget.onSelected(place, isFrom);
+                          toAddress = place;
+                          setState(() {});
+                        }, false)));
+              },
               child: SizedBox(
                 width: double.infinity,
                 height: double.infinity,
